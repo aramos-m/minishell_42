@@ -1,4 +1,16 @@
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aramos-m <aramos-m@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/29 13:34:14 by aramos-m          #+#    #+#             */
+/*   Updated: 2025/10/29 13:34:20 by aramos-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
 
 static char	*divide(char const *s, char c, int *pos)
 {
@@ -57,12 +69,12 @@ char	**ft_split(char const *s, char c)
 	int		j;
 
 	if (!s)
-		return (0);
+		return (NULL);
 	i = count_word(s, c);
 	j = 0;
 	result = calloc(sizeof(char *), (i + 1));
 	if (!result)
-		return (0);
+		return (NULL);
 	i = 0;
 	while (s[j])
 	{
@@ -70,7 +82,7 @@ char	**ft_split(char const *s, char c)
 		{
 			result[i] = divide(s, c, &j);
 			if (!result[i++])
-				return (free_result(result, i), 0);
+				return (free_result(result, i), NULL);
 		}
 		else
 			j++;
