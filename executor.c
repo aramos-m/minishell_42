@@ -6,7 +6,7 @@
 /*   By: aramos-m <aramos-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 13:12:03 by aramos-m          #+#    #+#             */
-/*   Updated: 2025/10/29 13:17:50 by aramos-m         ###   ########.fr       */
+/*   Updated: 2025/10/29 18:47:02 by aramos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ int main(void)
 
             if(strncmp(args[0], "echo", 5) == 0) // Para que busque también el final de la string
                 echo(args);
-            if(access(args[0], X_OK) == 0)
+            else if(access(args[0], X_OK) == 0)
             {
                 pid = fork();
                 if (pid == 0)
                     execve(args[0], args, NULL); // args: const char *path, char *const _Nullable argv[], char *const _Nullable envp[]
                 else
-                    wait(); // Espera al hijo
+                    wait(NULL); // Espera al hijo
             }
         }
         free(input);
