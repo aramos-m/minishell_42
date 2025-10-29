@@ -1,37 +1,16 @@
-#include <stdio.h> // printf
-#include <stdlib.h> // free
-#include <readline/readline.h> //readline
-#include <readline/history.h> // add_history
-#include <unistd.h> // execve, fork
-#include <string.h> // strncmp
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   executor.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aramos-m <aramos-m@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/29 13:12:03 by aramos-m          #+#    #+#             */
+/*   Updated: 2025/10/29 13:15:23 by aramos-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// Built in: echo -n
-void    echo(char **args)
-{
-    int arg_n;
-    int i;
-
-    i = 1;
-    if(args[1][0] == '-' && args[1][1] == 'n' && args[1][2]  == '\0')
-    {
-        arg_n = 1;
-        i++;
-    }
-    while(args[i])
-    {
-        printf("%s", args[i]);
-        i++;
-        if(args[i] != NULL)
-            printf(" ");
-    }
-    if(arg_n != 1)
-    {
-        printf("\n");
-    }
-    return ;
-}
-
-char	**ft_split(char const *s, char c);
+#include "minishell.h"
 
 int main(void)
 {
@@ -56,7 +35,6 @@ int main(void)
 
             if(strncmp(args[0], "echo", 5) == 0) // Para que busque también el final de la string
                 echo(args);
-
             if(access(args[0], X_OK) == 0)
             {
                 pid = fork();
@@ -68,6 +46,5 @@ int main(void)
         }
         free(input);
     }
-    printf("You typed: %s\n", input);
     return (0);
 }
