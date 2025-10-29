@@ -1,18 +1,28 @@
-NAME = minishell
-SRC = executor.c utils.c builtins/echo.c
-OBJ = $(SRC:.c=.o)
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+NAME        = minishell
+
+CC          = cc
+CFLAGS      = -Wall -Wextra -Werror -g -Iincludes
+RM          = rm -f
+
+SRC         = src/executor.c \
+              src/utils.c \
+              src/builtins/echo.c
+
+OBJ         = $(SRC:.c=.o)
+
+LIBS        = -lreadline
+
+all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -lreadline -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 
 clean:
-	rm -f $(OBJ)
+	$(RM) $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
-re: fclean $(NAME)
+re: fclean all
 
 .PHONY: all clean fclean re
