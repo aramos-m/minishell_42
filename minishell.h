@@ -19,6 +19,7 @@
 # include <string.h> // strncmp
 # include <readline/readline.h> // readline
 # include <readline/history.h> // add_history
+# include <sys/wait.h> // wait
 
 // Utils
 char	**ft_split(char const *s, char c);
