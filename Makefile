@@ -1,18 +1,28 @@
-NAME = minishell
-SRC = executor.c utils.c builtins/echo.c
-OBJ = $(SRC:.c=.o)
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+NAME    = minishell
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -lreadline -o $(NAME)
+# Rutas correctas según tu estructura de carpetas
+SRCS    = src/executor.c src/signals.c src/utils.c src/builtins/echo.c
+
+OBJS    = $(SRCS:.c=.o)
+
+CC      = cc
+CFLAGS  = -Wall -Wextra -Werror -g -Iincludes
+# -Iincludes es importante para que encuentre minishell.h y signals.h
+
+# Librería readline (necesaria para minishell)
+LIBS    = -lreadline
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean $(NAME)
+re: fclean all
+
+all: $(NAME)
 
 .PHONY: all clean fclean re
