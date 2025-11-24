@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "signals.h"
 
 static char	*divide(char const *s, char c, int *pos)
 {
