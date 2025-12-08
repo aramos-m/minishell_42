@@ -1,7 +1,7 @@
 NAME    = minishell
 
 # Rutas correctas según tu estructura de carpetas
-SRCS    = src/executor.c src/signals.c src/utils.c src/builtins/echo.c
+SRCS    = src/minishell.c src/executor.c src/signals.c src/utils.c src/builtins/echo.c src/
 
 OBJS    = $(SRCS:.c=.o)
 
