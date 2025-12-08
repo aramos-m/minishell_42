@@ -24,6 +24,7 @@
 # include <errno.h>
 # include <readline/readline.h>		// readline
 # include <readline/history.h>		// add_history
+# include "../libft/libft.h"
 
 // colors for the prompt (it's optional, but it's cool)
 # define RED	"\033[1;31m"

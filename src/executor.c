@@ -16,23 +16,26 @@
 char	*get_cmd_path(char *cmd, char **envp)
 {
 	int	i;
-	char	*paths;
+	char	**paths;
 	char	*part_path;
 	char	*full_path;
 
 	if (access(cmd, X_OK) == 0)
-		return (strdup(cmd));
+		return (ft_strdup(cmd));
 	i = 0;
-	while (envp[i])
+	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5) != 0)
+		i++;
+	if (!envp[i])
 		return (NULL);
 	paths = ft_split(envp[i] + 5, ':');
 	i = 0;
 	while (paths[i])
 	{
+		//Mejorar construccion de la ruta con ft_strjoin (ver pipex)
 		part_path = malloc(strlen(paths[i]) + strlen(cmd) + 2);
-		strcpy(part_path, paths[i]);
-		strcat(part_path, "/");
-		strcat(part_path, cmd);
+		ft_strlcpy(part_path, paths[i], ft_strlen(paths[i]) + i);
+		ft_strlcat(part_path, "/", ft_strlen(paths[i]) + 2);
+		ft_strlcat(part_path, cmd, ft_strlen(paths[i]) + ft_strlen(cmd) + 2);
 		if (access(part_path, X_OK) == 0)
 		{
 			free_matrix(paths);
@@ -66,7 +69,7 @@ int	exec_builtins(char **args, char **envp)
 	return (1);
 }
 
-void	executor_input(char *input, char **envp)
+void	execute_input(char *input, char **envp)
 {
 	char	**args;
 	int		pid;

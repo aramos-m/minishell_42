@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramos-m <aramos-m@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: sgarcia3 <sgarcia3@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 13:34:14 by aramos-m          #+#    #+#             */
-/*   Updated: 2025/10/29 13:34:20 by aramos-m         ###   ########.fr       */
+/*   Created: 2023/09/12 00:05:58 by sgarcia3          #+#    #+#             */
+/*   Updated: 2023/10/15 20:54:48 by sgarcia3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "signals.h"
+//#include <stdio.h>
+#include "libft.h"
 
-void	free_matrix(char **matrix)
+size_t	ft_strlen(const char *src)
 {
-	int i;
+	size_t	i;
 
 	i = 0;
-	if (!matrix)
-		return ;
-	while (matrix[i])
-	{
-		free(matrix[i]);
+	while (*(src + i))
 		i++;
-	}
-	free(matrix);
+	return (i);
 }
+
+/*int	main(void)
+{
+	char *str = "Hola Sara!";
+	printf("%d\n", ft_strlen(str));
+	return (0);
+}*/

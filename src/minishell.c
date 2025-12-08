@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 			printf("exit\n");
 			break;
 		}
-		if (input[0] != '`0')
+		if (input[0] != '0')
 		{
 			add_history(input);
 			execute_input(input, envp);
