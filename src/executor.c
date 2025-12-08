@@ -6,7 +6,7 @@
 /*   By: aramos-m <aramos-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 13:12:03 by aramos-m          #+#    #+#             */
-/*   Updated: 2025/10/29 18:47:02 by aramos-m         ###   ########.fr       */
+/*   Updated: 2025/12/08 21:25:53 by aramos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	*get_cmd_path(char *cmd, char **envp)
 	int	i;
 	char	**paths;
 	char	*part_path;
-	char	*full_path;
 
 	if (access(cmd, X_OK) == 0)
 		return (ft_strdup(cmd));
@@ -50,6 +49,8 @@ char	*get_cmd_path(char *cmd, char **envp)
 
 int	exec_builtins(char **args, char **envp)
 {
+	(void)envp;
+	
 	if (ft_strncmp(args[0], "echo", 5) == 0)
 		echo(args);
 	else if (ft_strncmp(args[0], "cd", 3) == 0)
@@ -69,7 +70,7 @@ int	exec_builtins(char **args, char **envp)
 	return (1);
 }
 
-void	execute_input(char *input, char **envp)
+void	exec_input(char *input, char **envp)
 {
 	char	**args;
 	int		pid;
@@ -92,7 +93,7 @@ void	execute_input(char *input, char **envp)
 		pid = fork();
 		if (pid == 0)
 		{
-			// setup_child_signals(); // Descomentar cuando signals.h esté listo
+			setup_child_signals();
 			execve(cmd_path, args, envp);
 			perror("execve");
 			exit(1);
