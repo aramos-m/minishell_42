@@ -13,39 +13,24 @@
 #include "minishell.h"
 #include "signals.h"
 
-int main(void)
+void	executor_input(char *input, char **envp)
 {
-    char    *input;
-    int     pid;
-    char    **args;
+	char	**args;
+	int		pid;
 
-    while (1)
-    {
-        input = readline("minishell> ");
-
-        if (!input)
-        {
-            printf("exit\n");
-            break;
-        }
-
-        if (input[0] != '\0')
-        {
-            add_history(input);
-            args = ft_split(input, ' ');
-
-            if(strncmp(args[0], "echo", 5) == 0) // Para que busque también el final de la string
-                echo(args);
-            else if(access(args[0], X_OK) == 0)
-            {
-                pid = fork();
-                if (pid == 0)
-                    execve(args[0], args, NULL); // args: const char *path, char *const _Nullable argv[], char *const _Nullable envp[]
-                else
-                    wait(NULL); // Espera al hijo
-            }
-        }
-        free(input);
-    }
-    return (0);
+	args = ft_split(input, ' ');
+	if (!args[0])
+		return ;
+	if (strncmp(args[0], "echo", 5) == 0)
+		echo(args);
+	else if (access (args[0], X_OK) == 0)
+	{
+		pid = fork();
+		if (pid == 0)
+			execve(args[0], args, envp);
+		else
+			wait(NULL);
+	}
+	else
+		printf("minishell: %s: command not found\n", args[0]);
 }
