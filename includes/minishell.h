@@ -56,11 +56,15 @@ typedef struct	s_minishell
 
 // Utils
 char	**ft_split(char const *s, char c);
-void	execute_input(char *input, char **envp);
+void	exec_input(char *input, char **envp);
 void	echo(char **args);
 void	free_matrix(char **matrix);
 
 // Builtins
 void	echo(char **args);
+
+// Environment
+char    **dup_env(char **envp);
+int     env_len(char **envp);
 
 #endif

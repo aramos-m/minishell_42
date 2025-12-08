@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgarcia3 <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aramos-m <aramos-m@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 21:01:45 by sgarcia3          #+#    #+#             */
-/*   Updated: 2025/10/31 21:37:21 by sgarcia3         ###   ########.fr       */
+/*   Updated: 2025/12/08 21:26:24 by aramos-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	handle_sigint(int sig)
 	rl_replace_line("", 0); //delete line
 	write(STDOUT_FILENO, "\n", 1); //STDOUT_FILENO: integer fd 1 (it has a buffer). Write break line
 	rl_on_new_line(); //new line
-	rl_display(); //write prompt again
+	rl_redisplay(); //write prompt again
 }
 
 /** Restaura el comportamiento por defecto de las señales SIGINT y SIGQUIT
